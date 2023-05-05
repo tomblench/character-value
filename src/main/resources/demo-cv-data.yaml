@@ -1,0 +1,33 @@
+heading:
+  - David Brent
+  - https://en.wikipedia.org/wiki/The_Office_(British_TV_series)
+
+personalStatement:
+  - I am a self starting, hard worker with an attention to detail who is equally good working on their own or as part of a team.
+  - Excellent communication skills.
+
+technicalSkillsEntries:
+  - heading: "Circus Skills"
+    narrative:
+      - "Lion taming, trapeze."
+  - heading: "Music"
+    narrative:
+      - "Grade 1 piano."
+employmentHistoryEntries:
+  - heading: "General Manager, Wernham Hogg"
+    narrative:
+      - blah.
+    bullets:
+      - blah.
+      - blah.
+    period: "2001 to 2003"
+educationEntries:
+  - heading: "University of Life"
+    narrative:
+      - Graduated with a 2.1 in Study Sciences.
+  - heading: "School of Hard Knocks"
+    narrative:
+      - Grades A-C.
+
+references:
+  - References available on request.

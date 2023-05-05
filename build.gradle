@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.6'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.hibernate.orm' version '6.1.7.Final'
+    id 'org.graalvm.buildtools.native' version '0.9.20'
+}
+
+group = 'org.blench'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.0'
+    implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.1.22'
+
+    compileOnly 'org.projectlombok:lombok'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+hibernate {
+    enhancement {
+        lazyInitialization true
+        dirtyTracking true
+        associationManagement true
+    }
+}
+
+task npm (type: Exec) {
+    workingDir "./frontend-react"
+    commandLine "npm", "run", "build"
+}
+
+task copyFrontend(type: Copy) {
+    from "./frontend-react/build"
+    into "./src/main/resources/static"
+}
+
+tasks.copyFrontend.dependsOn(npm)
+tasks.processResources.dependsOn(copyFrontend)
+
+tasks.named("bootBuildImage") {
+    docker {
+        bindHostToBuilder = true
+    }
+    pullPolicy = "IF_NOT_PRESENT"
+    imageName.set("ghcr.io/tomblench/${project.name}")
+    environment["BP_NATIVE_IMAGE"] = "false"
+}

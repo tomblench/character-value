@@ -1,0 +1,16 @@
+* TODO tests
+* DONE move event thinning to a generic javascript class
+* DONE rename everywhere to "Character Value" or similar
+* DONE proper gradle build/package/deploy including react compile and copy
+* DONE amusing fake cv default
+* DONE remove all hardcoding from template
+* TODO UI niceties
+** banner, explanation
+** loading spinner
+** error/ok indication
+* TODO future/non-urgent features
+** login/security
+   how to ensure pdf fetching works as cookies aren't sent for this?
+** cv saving, associate with session
+** mobile web version?
+   

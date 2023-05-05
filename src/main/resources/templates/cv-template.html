@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- https://stackoverflow.com/a/67146607 -->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{classpath:static/css/style.css}" />
+</head>
+<body>
+
+<h1 class="top-heading" th:each="entry : ${cv.heading}" th:text="${entry}"></h1>
+
+<h1>
+    Personal Statement
+</h1>
+<p th:each="entry : ${cv.personalStatement}" th:text="${entry}"></p>
+
+<h1>
+    Technical Skills
+</h1>
+<div th:each="entry : ${cv.technicalSkillsEntries}">
+    <h2 th:text="${entry.heading}"></h2>
+    <p th:text="${entry.narrative[0]}"></p>
+</div>
+
+<h1>
+    Employment History
+</h1>
+<div th:each="entry : ${cv.employmentHistoryEntries}">
+    <h2 th:text="${entry.period} + ' — ' + ${entry.heading}"></h2>
+    <p th:each="line : ${entry.narrative}" th:text="${line}"></p>
+    <ul th:if="${not #lists.isEmpty(entry.bullets)}">
+        <li th:each="bullet : ${entry.bullets}" th:text="${bullet}"></li>
+    </ul>
+</div>
+
+<h1>
+    Education
+</h1>
+<div th:each="entry : ${cv.educationEntries}">
+    <h2 th:text="${entry.heading}"></h2>
+    <p th:each="line : ${entry.narrative}" th:text="${line}"></p>
+</div>
+
+<h1>
+    References
+</h1>
+<p th:each="entry : ${cv.references}" th:text="${entry}"></p>
+
+</body>
+</html>
