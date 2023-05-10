@@ -59,4 +59,7 @@ jobs:
         arguments: bootbuildimage
         
     - name: Push Docker image
-      run: docker push ${{ env.REGISTRY }}/${{ github.repository_owner }}/character-value:latest
+      uses: docker/build-push-action@v4
+      with:
+        push: true
+        tags: ${{ github.repository_owner }}/character-value:latest
