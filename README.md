@@ -14,3 +14,5 @@ Technologies used:
 - Spring Boot
 - React
 - Thymeleaf
+
+![screenshot.png](screenshot.png)
